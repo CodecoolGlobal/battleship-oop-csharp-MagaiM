@@ -18,6 +18,11 @@ namespace Codecool.Battleship
             Position = (x, y);
         }
 
+        public Square()
+        {
+            _squareStatus = SquareStatus.Empty;
+        }
+
         public void SetSquareStatus(SquareStatus squareStatus)
         {
             _squareStatus = squareStatus;
