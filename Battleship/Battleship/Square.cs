@@ -23,6 +23,11 @@ namespace Codecool.Battleship
             _squareStatus = squareStatus;
         }
 
+        public Square()
+        {
+            _squareStatus = SquareStatus.Empty;
+        }
+
         public void SetSquareStatus(SquareStatus squareStatus)
         {
             _squareStatus = squareStatus;
