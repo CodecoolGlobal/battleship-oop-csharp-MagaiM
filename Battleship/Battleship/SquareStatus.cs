@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Codecool.Battleship
 {
-    internal class SquareStatus
+    enum SquareStatus
     {
+        Empty = '~',
+        Ship = 'S',
+        Hit = 'H',
+        Missed = 'M'
     }
 }
