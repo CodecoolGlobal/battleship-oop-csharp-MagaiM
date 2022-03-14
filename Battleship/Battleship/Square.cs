@@ -12,10 +12,15 @@ namespace Codecool.Battleship
 
         private SquareStatus _squareStatus;
 
-        private Square(int x, int y)
+        public Square(int x, int y)
         {
             _squareStatus = SquareStatus.Empty;
             Position = (x, y);
+        }
+
+        public Square(SquareStatus squareStatus)
+        {
+            _squareStatus = squareStatus;
         }
 
         public Square()
