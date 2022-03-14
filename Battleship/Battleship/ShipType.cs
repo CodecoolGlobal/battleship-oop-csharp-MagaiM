@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Codecool.Battleship
 {
-    internal class ShipType
+    enum ShipType
     {
+        Carrier = 5,
+        Battleship = 4,
+        Cruiser = 3,
+        Submarine = 2,
+        Destroyer = 1
     }
 }
