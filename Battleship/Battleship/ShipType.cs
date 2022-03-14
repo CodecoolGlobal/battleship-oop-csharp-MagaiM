@@ -11,7 +11,7 @@ namespace Codecool.Battleship
         Carrier = 5,
         Battleship = 4,
         Cruiser = 3,
-        Submarine = 2,
-        Destroyer = 1
+        Submarine = 3,
+        Destroyer = 2
     }
 }
