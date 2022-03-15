@@ -8,5 +8,12 @@ namespace Codecool.Battleship
 {
     internal class Game
     {
+        public void Run()
+        {
+            while (true)
+            {
+                
+            }
+        }
     }
 }
