@@ -10,32 +10,33 @@ namespace Codecool.Battleship
     {
         public (int x, int y) Position { get; set; }
 
-        private SquareStatus _squareStatus;
+        public SquareStatus SquareStatus { get; set; }
 
         public Square(int x, int y)
         {
-            _squareStatus = SquareStatus.Empty;
+            SquareStatus = SquareStatus.Empty;
             Position = (x, y);
         }
 
         public Square(SquareStatus squareStatus)
         {
-            _squareStatus = squareStatus;
+            SquareStatus = squareStatus;
+        }
+
+        public Square(int x, int y, SquareStatus squareStatus)
+        {
+            SquareStatus = squareStatus;
+            Position = (x, y);
         }
 
         public Square()
         {
-            _squareStatus = SquareStatus.Empty;
-        }
-
-        public void SetSquareStatus(SquareStatus squareStatus)
-        {
-            _squareStatus = squareStatus;
+            SquareStatus = SquareStatus.Empty;
         }
 
         public char GetCharacter()
         {
-            return (char)_squareStatus;
+            return (char)SquareStatus;
         }
     }
 }
