@@ -8,19 +8,19 @@ namespace Codecool.Battleship
 {
     internal class Board
     {
-        private Square[,] _ocean;
+        public Square[,] Ocean { get; }
 
-        public bool IsPlacementOk { get; }
+        public bool IsPlacementOk { get; }      //WTF is this?
 
         public Board()
         {
-            _ocean = new Square[10, 10];
+            Ocean = new Square[10, 10];
 
-            for (int y = 0; y < _ocean.GetLength(0); y++)
+            for (int y = 0; y < Ocean.GetLength(0); y++)
             {
-                for (int x = 0; x < _ocean.GetLength(1); x++)
+                for (int x = 0; x < Ocean.GetLength(1); x++)
                 {
-                    _ocean[y, x].Position = (x, y);
+                    Ocean[y, x].Position = (x, y);
                 }
             }
         }
