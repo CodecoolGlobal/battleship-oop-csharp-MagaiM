@@ -8,5 +8,6 @@ namespace Codecool.Battleship
 {
     internal class Player
     {
+        public List<Ship> Ships = new();
     }
 }
