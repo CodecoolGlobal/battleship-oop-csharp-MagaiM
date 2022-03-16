@@ -1,13 +1,26 @@
-﻿using Codecool.Battleship.UI;
+﻿using System.Runtime.InteropServices;
+using Codecool.Battleship.UI;
 
 namespace Codecool.Battleship
 {
     public class Battleship
     {
-        private static Display _display = new(); // WTF
-        private static Input _input = new();     // WTF
+        private Display _display;
+        private Input _input;
+        private Game _game;
 
+        public Battleship()
+        {
+            _display = new Display();
+            _input = new Input();
+            _game = new Game(_display, _input);
+        }
         public static void Main()
+        {
+            new Battleship().MainMenu();
+        }
+
+        private void MainMenu()
         {
             //TODO: The Battleship class displays the main menu and allows the user to a start new game, display high scores, and exit.
             bool gameRunning = true;
@@ -16,7 +29,7 @@ namespace Codecool.Battleship
                 "Exit",
                 "Start New Game",
                 "Display High Scores"
-                
+
             };
             List<string> gameModeOptions = new List<String>()
             {
@@ -37,7 +50,7 @@ namespace Codecool.Battleship
             while (gameRunning)
             {
                 _display.ShowMenu(mainMenuOptions);
-                int option = _input.SelectMenu(mainMenuOptions);
+                int option = _input.SelectMenu(mainMenuOptions.Count);
                 switch (option)
                 {
                     case 1:
@@ -46,23 +59,34 @@ namespace Codecool.Battleship
                         while (inGameMenu)
                         {
                             _display.ShowMenu(gameModeOptions);
-                            option = _input.SelectMenu(gameModeOptions);
+                            option = _input.SelectMenu(gameModeOptions.Count);
                             switch (option)
                             {
                                 case 1:
                                     //PVE
                                     _display.ShowMenu(gameDifficultyOptions);
-                                    option = _input.SelectMenu(gameDifficultyOptions);
+                                    option = _input.SelectMenu(gameDifficultyOptions.Count);
                                     switch (option)
                                     {
                                         case 1:
+                                            _game.Difficulty = AiDifficulty.Easy;
+
+                                            //newGame.Run();// Run(SOLO / MULTI)
+                                            inGameMenu = false;
+                                            // restart ??? --- change dificulty inGameMenu = false??
+                                            // quit to dekstop / main menu 
                                             //Easy PVE
                                             break;
                                         case 2:
                                             //Medium PVE
+                                            _game.Run();
+                                            //newGame.Run();// Run(SOLO / MULTI)
+                                            inGameMenu = false;
                                             break;
                                         case 3:
                                             //Hard PVE
+                                            //newGame.Run();// Run(SOLO / MULTI)
+                                            inGameMenu = false;
                                             break;
                                     }
 

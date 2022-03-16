@@ -36,19 +36,38 @@ namespace Codecool.Battleship.UI
             return Regex.IsMatch(cords, @"^[a-zA-Z]{1}\d+$");
         }
 
-        public int SelectMenu(List<string> options)
+        public int SelectMenu(int optionNum)
         {
             while (true)
             {
                 try
                 {
                     int input = Convert.ToInt32(Console.ReadLine());
-                    if (input >= 0 && input < options.Count)
+                    if (input >= 0 && input < optionNum)
                         return input;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
+            }
+        }
+        
+        public Direction GetDirection(int optionNum)
+        {
+            int option = SelectMenu(optionNum);
+
+            switch (option)
+            {
+                case 1:
+                    return Direction.Up;
+                case 2:
+                    return Direction.Down;
+                case 3:
+                    return Direction.Left;
+                case 4:
+                    return Direction.Right;
+                default:
+                    return Direction.Up;
             }
         }
     }

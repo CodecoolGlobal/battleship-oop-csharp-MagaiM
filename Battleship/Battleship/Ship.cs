@@ -21,28 +21,6 @@ namespace Codecool.Battleship
             }
         }
         
-        public Ship(int x, int y, Direction direction, ShipType shipType)
-        {
-            ShipType = shipType;
-            for (int i = 0; i < (int)shipType; i++)
-            {
-                switch (direction)
-                {
-                    case Direction.Up:
-                        ShipLocation.Add(new Square(x, y - i, SquareStatus.Ship));
-                        break;
-                    case Direction.Down:
-                        ShipLocation.Add(new Square(x, y + i, SquareStatus.Ship));
-                        break;
-                    case Direction.Left:
-                        ShipLocation.Add(new Square(x - i, y, SquareStatus.Ship));
-                        break;
-                    case Direction.Right:
-                        ShipLocation.Add(new Square(x + 1, y, SquareStatus.Ship));
-                        break;
-                }
-            }
-        }
 
         public Ship(int x, int y, Direction direction, ShipType shipType, Board board)
         {
