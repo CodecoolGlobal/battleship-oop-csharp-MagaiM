@@ -31,19 +31,19 @@ namespace Codecool.Battleship
                 {
                     case Direction.Up:
                         ShipLocation.Add(board.Ocean[y - i, x]);
-                        board.Ocean[y - i, x].SquareStatus = SquareStatus.Ship; //------ Better place?
+                        board.Ocean[y - i, x].SquareStatus = SquareStatus.Ship;
                         break;
                     case Direction.Down:
                         ShipLocation.Add(board.Ocean[y + i, x]);
-                        board.Ocean[y + i, x].SquareStatus = SquareStatus.Ship; //------ Better place?
+                        board.Ocean[y + i, x].SquareStatus = SquareStatus.Ship;
                         break;
                     case Direction.Left:
                         ShipLocation.Add(board.Ocean[y, x - i]);
-                        board.Ocean[y, x - i].SquareStatus = SquareStatus.Ship; //------ Better place?
+                        board.Ocean[y, x - i].SquareStatus = SquareStatus.Ship;
                         break;
                     case Direction.Right:
                         ShipLocation.Add(board.Ocean[y, x + i]);
-                        board.Ocean[y, x + i].SquareStatus = SquareStatus.Ship; //------ Better place?
+                        board.Ocean[y, x + i].SquareStatus = SquareStatus.Ship;
                         break;
                 }
             }

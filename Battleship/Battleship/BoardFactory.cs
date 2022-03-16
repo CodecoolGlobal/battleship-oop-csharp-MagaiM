@@ -14,48 +14,49 @@ namespace Codecool.Battleship
         private Display _display;
         private Input _input;
         private Array _shipTypes = Enum.GetValues(typeof(ShipType));
-
+        
         public BoardFactory(Display display, Input input)
         {
             _display = display;
             _input = input;
-
+            Array.Reverse(_shipTypes);
         }
 
-        public void ManualPlacement(Board board, Player player)
+        public void ManualPlacement(Player player)
         {
             foreach (ShipType shipType in _shipTypes)
             {
                 while (true)
                 {
+                    _display.PrintBoard(player.Board.Ocean);
                     var options = Enum.GetNames(typeof(Direction)).ToList();
                     _display.PrintMessage("Give a cord to put your ship!");
                     (int x, int y) = _input.GetCords();
                     _display.ShowMenuWithoutBackOption(options);
                     Direction direction = _input.GetDirection(options.Count);
-                    if (board.IsPlacementOk(x, y, direction, shipType))
+                    if (player.Board.IsPlacementOk(x, y, direction, shipType))
                     {
-                        player.Ships.Add(new Ship(x, y, direction, shipType, board));
+                        player.Ships.Add(new Ship(x, y, direction, shipType, player.Board));
                         break;
                     }
                 }
             }
         }
 
-        public void RandomPlacement(Board board, Player player)
+        public void RandomPlacement(Player player)
         {
             Random random = new Random();
             foreach (ShipType shipType in _shipTypes)
             {
                 while (true)
                 {
-                    (int x, int y) = (random.Next(board.Ocean.GetLength(1)),
-                        random.Next(board.Ocean.GetLength(0)));
+                    (int x, int y) = (random.Next(player.Board.Ocean.GetLength(1)),
+                        random.Next(player.Board.Ocean.GetLength(0)));
                     Array directions = Enum.GetValues(typeof(Direction));
                     Direction direction = (Direction)directions.GetValue(random.Next(directions.Length));
-                    if (board.IsPlacementOk(x, y, direction, shipType))
+                    if (player.Board.IsPlacementOk(x, y, direction, shipType))
                     {
-                        player.Ships.Add(new Ship(x, y, direction, shipType, board));
+                        player.Ships.Add(new Ship(x, y, direction, shipType, player.Board));
                         break;
                     }
                 }

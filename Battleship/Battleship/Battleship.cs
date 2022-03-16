@@ -70,7 +70,7 @@ namespace Codecool.Battleship
                                     {
                                         case 1:
                                             _game.Difficulty = AiDifficulty.Easy;
-
+                                            
                                             //newGame.Run();// Run(SOLO / MULTI)
                                             inGameMenu = false;
                                             // restart ??? --- change dificulty inGameMenu = false??
@@ -92,7 +92,7 @@ namespace Codecool.Battleship
 
                                     break;
                                 case 2:
-                                    //PVP
+                                    _game.Multiplayer();
                                     break;
                                 case 0:
                                     //Back

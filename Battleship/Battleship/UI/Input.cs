@@ -19,8 +19,8 @@ namespace Codecool.Battleship.UI
                 shipStartingCords = Console.ReadLine();
             }
 
-            x = ConvertLetterToNum(shipStartingCords[0]);
-            y = Convert.ToInt32(shipStartingCords.Substring(1));
+            y = ConvertLetterToNum(shipStartingCords[0]);
+            x = Convert.ToInt32(shipStartingCords.Substring(1)) - 1;
 
             return (x, y);
         }
@@ -51,10 +51,26 @@ namespace Codecool.Battleship.UI
                 }
             }
         }
-        
+
+        public int GetDirectionSelect(int optionNum)
+        {
+            while (true)
+            {
+                try
+                {
+                    int input = Convert.ToInt32(Console.ReadLine());
+                    if (input > 0 && input <= optionNum)
+                        return input;
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
         public Direction GetDirection(int optionNum)
         {
-            int option = SelectMenu(optionNum);
+            int option = GetDirectionSelect(optionNum);
 
             switch (option)
             {
@@ -69,6 +85,11 @@ namespace Codecool.Battleship.UI
                 default:
                     return Direction.Up;
             }
+        }
+
+        internal void PressEnterToContinue()
+        {
+            Console.ReadLine();
         }
     }
 }

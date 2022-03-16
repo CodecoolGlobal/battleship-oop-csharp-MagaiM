@@ -20,5 +20,29 @@ namespace Codecool.Battleship
         {
            Board = board;
         }
+
+        public bool IsAlive
+        {
+            get
+            {
+                foreach (Ship ship in Ships)
+                {
+                    foreach (Square square in ship.ShipLocation)
+                    {
+                        if (square.SquareStatus == SquareStatus.Ship)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        internal void Shoot()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

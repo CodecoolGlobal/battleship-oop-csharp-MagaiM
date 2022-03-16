@@ -44,10 +44,31 @@ namespace Codecool.Battleship
         //}
         public void Multiplayer()
         {
-            var playerOne = new Player();
-            var playerTwo = new Player();
-            //--print
-            //playerOne Placement()
+            var player1 = new Player();
+            var player2 = new Player();
+            _boardFactory.ManualPlacement(player1);
+            _boardFactory.ManualPlacement(player2);
+            while(true)
+            {
+                // _display.PrintMessage();
+                _display.PrintBoard(player2.Board.Ocean);
+                player1.Shoot();
+                if (!player2.IsAlive)
+                {
+                    _display.PrintMessage("Player1 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
+                    _input.PressEnterToContinue();
+                    break;
+                }
+
+                _display.PrintBoard(player1.Board.Ocean);
+                player2.Shoot();
+                if (!player1.IsAlive)
+                {
+                    _display.PrintMessage("Player2 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
+                    _input.PressEnterToContinue();
+                    break;
+                }
+            }
 
         }
 
