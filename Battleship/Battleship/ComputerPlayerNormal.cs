@@ -154,13 +154,21 @@ namespace Codecool.Battleship
             }
             else
             {
-                (x, y) = (random.Next(otherPlayer.Board.Ocean.GetLength(1)),
-                    random.Next(otherPlayer.Board.Ocean.GetLength(0)));
-
+                (x, y) = GetRandomCords(otherPlayer, random);
                 if (otherPlayer.Board.Ocean[y, x].SquareStatus == SquareStatus.Ship)
                     PreviousHits.Add(otherPlayer.Board.Ocean[y, x]);
                 return (x, y);
             }
+        }
+
+        protected virtual (int, int) GetRandomCords(Player otherPlayer, Random random)
+        {
+            int x;
+            int y;
+            (x, y) = (random.Next(otherPlayer.Board.Ocean.GetLength(1)),
+                random.Next(otherPlayer.Board.Ocean.GetLength(0)));
+
+            return (x, y);
         }
     }
 }
