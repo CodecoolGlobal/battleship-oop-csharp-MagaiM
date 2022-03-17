@@ -31,7 +31,7 @@ namespace Codecool.Battleship.UI
             }
         }
 
-        public void PrintBoard(Square[,] Ocean)
+        public void PrintBoard(Square[,] Ocean, bool shootingPhase=false)
         {
             Console.Clear();
             PrintNums(Ocean.GetLength(0));
@@ -41,14 +41,21 @@ namespace Codecool.Battleship.UI
                 Console.Write(NumberToAlpha(y) + "  ");
                 for (int x = 0; x < Ocean.GetLength(1); x++)
                 {
-                    Console.Write(Ocean[y, x].GetCharacter() + "  ");
+                    IsShipInShootingPhase(Ocean[y, x], shootingPhase);
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
         }
-
-
+        
+        public void IsShipInShootingPhase(Square square, bool shootingPhase)
+        {
+            if (square.SquareStatus == SquareStatus.Ship && shootingPhase)
+                Console.Write((char)SquareStatus.Empty + "  ");
+            else
+                Console.Write(square.GetCharacter() + "  ");
+        }
+        
         private string NumberToAlpha(long number, bool isLower = false)
         {
             string returnVal = "";

@@ -10,7 +10,21 @@ namespace Codecool.Battleship
     {
         public List<Square> ShipLocation = new List<Square>();
         public ShipType ShipType { get; }
-        
+        public bool HasSunk
+        {
+            get
+            {
+                foreach (Square square in ShipLocation)
+                {
+                    if (square.SquareStatus == SquareStatus.Ship)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
         public Ship(ShipType shipType)
         {
             ShipType = shipType;
@@ -20,7 +34,14 @@ namespace Codecool.Battleship
                 ShipLocation.Add(shipSquare);
             }
         }
-        
+
+        public void SetSunk()
+        {
+            foreach (var square in ShipLocation)
+            {
+                square.SquareStatus = SquareStatus.Sunk;
+            }
+        }
 
         public Ship(int x, int y, Direction direction, ShipType shipType, Board board)
         {

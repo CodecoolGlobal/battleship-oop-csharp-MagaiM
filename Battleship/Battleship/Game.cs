@@ -51,8 +51,9 @@ namespace Codecool.Battleship
             while(true)
             {
                 // _display.PrintMessage();
-                _display.PrintBoard(player2.Board.Ocean);
-                player1.Shoot();
+                _display.PrintMessage("Player 1 Shoot");
+                _display.PrintBoard(player2.Board.Ocean, true);
+                player1.Shoot(_display, _input, player2);
                 if (!player2.IsAlive)
                 {
                     _display.PrintMessage("Player1 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
@@ -60,8 +61,9 @@ namespace Codecool.Battleship
                     break;
                 }
 
-                _display.PrintBoard(player1.Board.Ocean);
-                player2.Shoot();
+                _display.PrintMessage("Player 2 Shoot");
+                _display.PrintBoard(player1.Board.Ocean, true);
+                player2.Shoot(_display, _input, player1);
                 if (!player1.IsAlive)
                 {
                     _display.PrintMessage("Player2 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");

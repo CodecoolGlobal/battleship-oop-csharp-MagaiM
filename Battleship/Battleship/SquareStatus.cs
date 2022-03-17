@@ -9,8 +9,9 @@ namespace Codecool.Battleship
     enum SquareStatus
     {
         Empty = '~',
-        Ship = 'S',
+        Ship = 'X',
         Hit = 'H',
-        Missed = 'M'
+        Missed = 'M',
+        Sunk = 'S'
     }
 }
