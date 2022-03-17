@@ -51,7 +51,7 @@ namespace Codecool.Battleship
             {
 
                 display.PrintMessage("Give a cord to shoot at.");
-                (int x, int y) = GetCords();
+                (int x, int y) = GetCords(otherPlayer);
                 if (ValidShot(x, y, otherPlayer.Board))
                 {
                     if (otherPlayer.Board.Ocean[y, x].SquareStatus == SquareStatus.Ship)
@@ -73,7 +73,7 @@ namespace Codecool.Battleship
             }
         }
 
-        protected virtual (int, int) GetCords()
+        protected virtual (int, int) GetCords(Player otherPlayer)
         {
             
             return _input.GetCords();

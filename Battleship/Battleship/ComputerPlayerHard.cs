@@ -8,9 +8,9 @@ namespace Codecool.Battleship
 {
     internal class ComputerPlayerHard : ComputerPlayer
     {
-        protected override (int, int) GetCords()
+        protected override (int, int) GetCords(Player otherPlayer)
         {
-            return base.GetCords();
+            return base.GetCords(otherPlayer);
         }
     }
 }

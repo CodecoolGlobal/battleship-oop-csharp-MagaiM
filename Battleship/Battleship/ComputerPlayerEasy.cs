@@ -9,7 +9,7 @@ namespace Codecool.Battleship
 {
     internal class ComputerPlayerEasy : ComputerPlayer
     {
-        protected override (int, int) GetCords()
+        protected override (int, int) GetCords(Player otherPlayer)
         {
             Random random = new Random();
             return (random.Next(Board.Ocean.GetLength(1)),
