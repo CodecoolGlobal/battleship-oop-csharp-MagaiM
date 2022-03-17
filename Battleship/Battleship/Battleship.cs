@@ -41,12 +41,9 @@ namespace Codecool.Battleship
             {
                 "Back",
                 "Easy",
-                "Medium",
+                "Normal",
                 "Hard"
             };
-
-            //bool valami = _input.IsAlpha('a');
-
             while (gameRunning)
             {
                 _display.ShowMenu(mainMenuOptions);
@@ -70,25 +67,18 @@ namespace Codecool.Battleship
                                     {
                                         case 1:
                                             _game.Difficulty = AiDifficulty.Easy;
-                                            
-                                            //newGame.Run();// Run(SOLO / MULTI)
                                             inGameMenu = false;
-                                            // restart ??? --- change dificulty inGameMenu = false??
-                                            // quit to dekstop / main menu 
-                                            //Easy PVE
                                             break;
                                         case 2:
-                                            //Medium PVE
-                                            _game.Run();
-                                            //newGame.Run();// Run(SOLO / MULTI)
+                                            _game.Difficulty = AiDifficulty.Normal;
                                             inGameMenu = false;
                                             break;
                                         case 3:
-                                            //Hard PVE
-                                            //newGame.Run();// Run(SOLO / MULTI)
+                                            _game.Difficulty = AiDifficulty.Hard;
                                             inGameMenu = false;
                                             break;
                                     }
+                                    _game.Singleplayer();
 
                                     break;
                                 case 2:

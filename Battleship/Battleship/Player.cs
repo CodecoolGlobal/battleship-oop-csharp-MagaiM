@@ -10,12 +10,15 @@ namespace Codecool.Battleship
 {
     internal class Player
     {
+        private readonly Input _input;
         public Board Board;
         public List<Ship> Ships = new();
+        
 
-        public Player()
+        public Player(Input input)
         {
-           Board = new Board();
+            _input = input;
+            Board = new Board();
         }
 
         public Player(Board board)
@@ -42,25 +45,26 @@ namespace Codecool.Battleship
             }
         }
 
-        internal void Shoot(Display display, Input input, Player otherPlayer)
+        internal void Shoot(Display display, Player otherPlayer)
         {
             while (true)
             {
 
                 display.PrintMessage("Give a cord to shoot at.");
-                (int x, int y) = input.GetCords();
+                (int x, int y) = GetCords();
                 if (ValidShot(x, y, otherPlayer.Board))
                 {
                     if (otherPlayer.Board.Ocean[y, x].SquareStatus == SquareStatus.Ship)
                     {
                         otherPlayer.Board.Ocean[y, x].SquareStatus = SquareStatus.Hit;
                         Ship hitShip = GetHitShip(x, y, otherPlayer);
-                        if (hitShip is not null && hitShip.HasSunk)
+                        if (hitShip.HasSunk)
                         {
-                            hitShip.SetSunk();
+                            hitShip.SetSunk(otherPlayer);
                         }
                     }
-                    else if (otherPlayer.Board.Ocean[y, x].SquareStatus == SquareStatus.Empty)
+                    else if (otherPlayer.Board.Ocean[y, x].SquareStatus == SquareStatus.Empty ||
+                             otherPlayer.Board.Ocean[y, x].SquareStatus == SquareStatus.NexToSunk)
                     {
                         otherPlayer.Board.Ocean[y, x].SquareStatus = SquareStatus.Missed;
                     }
@@ -69,17 +73,12 @@ namespace Codecool.Battleship
             }
         }
 
-        //private void SetSunkSquareStatus(int x, int y, Player otherPlayer)
-        //{
-        //    foreach (var ship in otherPlayer.Ships)
-        //    {
-        //        if (ship.HasSunk)
-        //        {
-        //            ship.SetSunk();
-        //        }
-        //    }
-        //}
-
+        protected virtual (int, int) GetCords()
+        {
+            
+            return _input.GetCords();
+        }
+        
         private Ship GetHitShip(int x, int y, Player otherPlayer)
         {
             foreach (var ship in otherPlayer.Ships)
@@ -90,7 +89,8 @@ namespace Codecool.Battleship
                         return ship;
                 }
             }
-            return null; // What to put here?------------------------------------------
+
+            throw new Exception("Hit ship was not found!");
         }
         
         private bool ValidShot(int x, int y, Board board)
@@ -98,7 +98,8 @@ namespace Codecool.Battleship
             return (x >= 0 || x < board.Ocean.GetLength(1) ||
                     y >= 0 || y < board.Ocean.GetLength(0)) &&
                    (board.Ocean[y, x].SquareStatus == SquareStatus.Empty ||
-                    board.Ocean[y, x].SquareStatus == SquareStatus.Ship);
+                    board.Ocean[y, x].SquareStatus == SquareStatus.Ship ||
+                    board.Ocean[y, x].SquareStatus == SquareStatus.NexToSunk);
         }
     }
 }

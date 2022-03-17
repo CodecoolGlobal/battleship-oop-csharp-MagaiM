@@ -33,7 +33,6 @@ namespace Codecool.Battleship.UI
 
         public void PrintBoard(Square[,] Ocean, bool shootingPhase=false)
         {
-            Console.Clear();
             PrintNums(Ocean.GetLength(0));
             Console.WriteLine();
             for (int y = 0; y < Ocean.GetLength(0); y++)
@@ -90,7 +89,12 @@ namespace Codecool.Battleship.UI
         }
 
         public void PrintResult()
-            {
-            }
+        {
         }
+
+        public void ClearConsole()
+        {
+            Console.Clear();
+        }
+    }
 }

@@ -10,8 +10,9 @@ namespace Codecool.Battleship
     {
         Empty = '~',
         Ship = 'X',
-        Hit = 'H',
-        Missed = 'M',
-        Sunk = 'S'
+        Hit = '#',
+        Missed = '@',
+        Sunk = 'S',
+        NexToSunk = '≈' //place holder char.
     }
 }

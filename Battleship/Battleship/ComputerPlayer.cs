@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Codecool.Battleship.UI;
 
 namespace Codecool.Battleship
 {
@@ -11,17 +12,6 @@ namespace Codecool.Battleship
 
         public ComputerPlayer(): base(new Board())
         {
-        }
-
-        public ComputerPlayer(AiDifficulty difficulty)
-        {
-            // if (easy ){
-
-            // }else if (medium){
-
-            // }else if (hard){
-
-            // }
         }
     }
 }

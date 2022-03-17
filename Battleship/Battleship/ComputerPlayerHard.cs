@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Codecool.Battleship
 {
-    enum AiDifficulty
+    internal class ComputerPlayerHard : ComputerPlayer
     {
-        Easy,
-        Normal,
-        Hard
+        protected override (int, int) GetCords()
+        {
+            return base.GetCords();
+        }
     }
 }

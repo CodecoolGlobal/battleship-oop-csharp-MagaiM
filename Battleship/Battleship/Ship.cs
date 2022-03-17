@@ -35,11 +35,13 @@ namespace Codecool.Battleship
             }
         }
 
-        public void SetSunk()
+        public void SetSunk(Player otherPlayer)
         {
             foreach (var square in ShipLocation)
             {
                 square.SquareStatus = SquareStatus.Sunk;
+                SetNearbySquare(square.Position.x, square.Position.y, otherPlayer.Board);
+                
             }
         }
 
@@ -68,6 +70,22 @@ namespace Codecool.Battleship
                         break;
                 }
             }
+        }
+
+        private void SetNearbySquare(int x, int y, Board board)
+        {
+            if (y + 1 < board.Ocean.GetLength(0) &&
+                board.Ocean[y + 1, x].SquareStatus == SquareStatus.Empty)
+                board.Ocean[y + 1, x].SquareStatus = SquareStatus.NexToSunk;
+            if (y - 1 >= 0 &&
+                board.Ocean[y - 1, x].SquareStatus == SquareStatus.Empty)
+                board.Ocean[y - 1, x].SquareStatus = SquareStatus.NexToSunk;
+            if (x + 1 < board.Ocean.GetLength(1) &&
+                board.Ocean[y, x + 1].SquareStatus == SquareStatus.Empty)
+                board.Ocean[y, x + 1].SquareStatus = SquareStatus.NexToSunk;
+            if (x - 1 >= 0 &&
+                board.Ocean[y, x - 1].SquareStatus == SquareStatus.Empty)
+                board.Ocean[y, x - 1].SquareStatus = SquareStatus.NexToSunk;
         }
     }
 }

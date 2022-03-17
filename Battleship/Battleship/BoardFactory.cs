@@ -28,6 +28,7 @@ namespace Codecool.Battleship
             {
                 while (true)
                 {
+                    _display.ClearConsole();
                     _display.PrintBoard(player.Board.Ocean);
                     var options = Enum.GetNames(typeof(Direction)).ToList();
                     _display.PrintMessage("Give a cord to put your ship!");
