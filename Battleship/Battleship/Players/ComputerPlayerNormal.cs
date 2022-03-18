@@ -59,7 +59,7 @@ namespace Codecool.Battleship.Players
                             }
 
                             break;
-                        case 3:
+                        case 3:                 //TODO Extract into method------------------------------------------
                             if (y - 1 >= 0 &&
                                 otherPlayer.Board.Ocean[y - 1, x].SquareStatus != SquareStatus.Missed &&
                                 otherPlayer.Board.Ocean[y - 1, x].SquareStatus != SquareStatus.NexToSunk)
@@ -68,7 +68,6 @@ namespace Codecool.Battleship.Players
                                     PreviousHits.Add(otherPlayer.Board.Ocean[y - 1, x]);
                                 return (x, y - 1);
                             }
-
                             break;
                     }
                 }
@@ -86,7 +85,7 @@ namespace Codecool.Battleship.Players
                         int randomOption = random.Next(0, 2);
                         switch (randomOption)
                         {
-                            case 0:
+                            case 0:                 //TODO Extract into method------------------------------------------
                                 x = PreviousHits[PreviousHits.Count - 1].Position.x;
                                 y = PreviousHits[PreviousHits.Count - 1].Position.y;
                                 if (y - 1 >= 0 &&
