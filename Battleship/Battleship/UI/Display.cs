@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Codecool.Battleship.Enums;
 
 namespace Codecool.Battleship.UI
 {
@@ -87,10 +88,6 @@ namespace Codecool.Battleship.UI
                     Console.Write(i + " ");
                 }
             }
-        }
-
-        public void PrintResult()
-        {
         }
 
         public void ClearConsole()
