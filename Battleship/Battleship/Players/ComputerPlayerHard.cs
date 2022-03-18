@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Codecool.Battleship.UI;
 
-namespace Codecool.Battleship
+namespace Codecool.Battleship.Players
 {
     internal class ComputerPlayerHard : ComputerPlayerNormal
     {
+        public ComputerPlayerHard(Display display) : base(display)
+        {
+        }
+
         protected override (int, int) GetRandomCords(Player otherPlayer, Random random)
         {
             int x, y;
