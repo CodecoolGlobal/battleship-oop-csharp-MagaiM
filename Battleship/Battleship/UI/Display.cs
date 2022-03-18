@@ -12,7 +12,7 @@ namespace Codecool.Battleship.UI
         public void ShowMenu(List<string> options)
         {
             Console.Clear();
-            //Console.OutputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
             for (int i = 1; i < options.Count; i++)
             {
                 Console.WriteLine($"({i}). {options[i]}");
@@ -24,7 +24,7 @@ namespace Codecool.Battleship.UI
         public void ShowMenuWithoutBackOption(List<string> options)
         {
             Console.Clear();
-            //Console.OutputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
             for (int i = 0; i < options.Count; i++)
             {
                 Console.WriteLine($"({i + 1}). {options[i]}");
@@ -33,6 +33,7 @@ namespace Codecool.Battleship.UI
 
         public void PrintBoard(Square[,] Ocean, bool shootingPhase=false)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             PrintNums(Ocean.GetLength(0));
             Console.WriteLine();
             for (int y = 0; y < Ocean.GetLength(0); y++)
