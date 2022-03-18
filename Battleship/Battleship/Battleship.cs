@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+﻿using Codecool.Battleship.Enums;
 using Codecool.Battleship.UI;
 
 namespace Codecool.Battleship
