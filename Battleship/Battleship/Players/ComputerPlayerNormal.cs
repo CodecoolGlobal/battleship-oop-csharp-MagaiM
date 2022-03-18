@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Codecool.Battleship.Enums;
+using Codecool.Battleship.UI;
 
-namespace Codecool.Battleship
+namespace Codecool.Battleship.Players
 {
     internal class ComputerPlayerNormal : ComputerPlayer
     {
         public List<Square> PreviousHits = new List<Square>();
+
+        public ComputerPlayerNormal(Display display) : base(display)
+        {
+        }
 
         protected override (int, int) GetCords(Player otherPlayer)
         {
