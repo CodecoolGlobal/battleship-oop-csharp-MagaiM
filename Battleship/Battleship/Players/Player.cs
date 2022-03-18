@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Codecool.Battleship.Enums;
 using Codecool.Battleship.UI;
 
-namespace Codecool.Battleship
+namespace Codecool.Battleship.Players
 {
     internal class Player
     {
         private readonly Input _input;
+        private readonly Display _display;
         public Board Board;
         public List<Ship> Ships = new();
         
 
-        public Player(Input input)
+        public Player(Input input, Display display)
         {
             _input = input;
+            _display = display;
             Board = new Board();
         }
 
-        public Player(Board board)
+        public Player(Display display)
         {
-           Board = board;
+            _display = display;
+            Board = new Board();
         }
 
         public bool IsAlive
@@ -45,12 +43,12 @@ namespace Codecool.Battleship
             }
         }
 
-        internal void Shoot(Display display, Player otherPlayer)
+        internal void Shoot(Player otherPlayer)
         {
             while (true)
             {
 
-                display.PrintMessage("Give a cord to shoot at.");
+                _display.PrintMessage("Give a cord to shoot at.");
                 (int x, int y) = GetCords(otherPlayer);
                 if (ValidShot(x, y, otherPlayer.Board))
                 {
