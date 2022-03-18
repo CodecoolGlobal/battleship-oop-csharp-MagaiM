@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Codecool.Battleship.Enums;
+using Codecool.Battleship.Players;
 using Codecool.Battleship.UI;
 
 namespace Codecool.Battleship
@@ -22,89 +19,36 @@ namespace Codecool.Battleship
 
         }
 
-        //public void Run()
-        //{
-        //    bool isTrue = true;
-        //    while (isTrue)
-        //    {
-        //        Board board = new Board();
-        //        _display.PrintBoard(board.Ocean);
-        //        isTrue = false;
-        //        Console.ReadLine();
-        //        if (Difficulty == AiDifficulty.None)
-        //        {
-        //            //
-        //            //ove
-        //        }else
-        //        {
-        //            // aimove(difficulty)
-        //        }
-
-        //    }
-        //}
-
         public void Multiplayer()
         {
-            var player1 = new Player(_input);
-            var player2 = new Player(_input);
+            var player1 = new Player(_input, _display);
+            var player2 = new Player(_input, _display);
             _boardFactory.ManualPlacement(player1);
             _boardFactory.ManualPlacement(player2);
             while (true)
             {
-                // _display.PrintMessage();
-                _display.ClearConsole();
-                _display.PrintMessage("Your Fleet");
-                _display.PrintBoard(player1.Board.Ocean);
-                _display.PrintMessage("Enemy Fleet");
-                _display.PrintBoard(player2.Board.Ocean, true);
-                _display.PrintMessage("Player 1 Shoot");
-                player1.Shoot(_display, player2);
-                if (!player2.IsAlive)
-                {
-                    _display.ClearConsole();
-                    _display.PrintMessage("Player 1 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
-                    _input.PressEnterToContinue();
-                    break;
-                }
-                _display.ClearConsole();
-                _display.PrintMessage("Press Enter to continue!");
-                _input.PressEnterToContinue();
-
-                _display.ClearConsole();
-                _display.PrintMessage("Your Fleet");
-                _display.PrintBoard(player2.Board.Ocean);
-                _display.PrintMessage("Enemy Fleet");
-                _display.PrintBoard(player1.Board.Ocean, true);
-                _display.PrintMessage("Player 2 Shoot");
-                player2.Shoot(_display, player1);
-                if (!player1.IsAlive)
-                {
-                    _display.ClearConsole();
-                    _display.PrintMessage("Player 2 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
-                    _input.PressEnterToContinue();
-                    break;
-                }
-                _display.ClearConsole();
-                _display.PrintMessage("Press Enter to continue!");
-                _input.PressEnterToContinue();
+                PlayerShoot(player1, player2, 1);
+                if (IsAlive(player2, 1)) break;
+                PlayerShoot(player2, player1, 2);
+                if (IsAlive(player1, 2)) break;
             }
 
         }
 
         public void Singleplayer()
         {
-            var player1 = new Player(_input);
+            var player1 = new Player(_input, _display);
             ComputerPlayer player2;
             switch (Difficulty)
             {
                 case AiDifficulty.Easy:
-                    player2 = new ComputerPlayerEasy();
+                    player2 = new ComputerPlayerEasy(_display);
                     break;
                 case AiDifficulty.Normal:
-                    player2 = new ComputerPlayerNormal();
+                    player2 = new ComputerPlayerNormal(_display);
                     break;
                 case AiDifficulty.Hard:
-                    player2 = new ComputerPlayerHard();
+                    player2 = new ComputerPlayerHard(_display);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -113,30 +57,54 @@ namespace Codecool.Battleship
             _boardFactory.RandomPlacement(player2);
             while (true)
             {
-                // _display.PrintMessage();
-                _display.ClearConsole();
-                _display.PrintMessage("Your Fleet");
-                _display.PrintBoard(player1.Board.Ocean);
-                _display.PrintMessage("Enemy Fleet");
-                _display.PrintBoard(player2.Board.Ocean, true);
-                _display.PrintMessage("Player 1 Shoot");
-                player1.Shoot(_display, player2);
+                PlayerShoot(player1, player2, 1);
                 if (!player2.IsAlive)
                 {
-                    _display.ClearConsole();
-                    _display.PrintMessage("Player 1 Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
-                    _input.PressEnterToContinue();
+                    PressEnterMessages("You have Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
                     break;
                 }
-                player2.Shoot(_display, player1);
+                player2.Shoot(player1);
                 if (!player1.IsAlive)
                 {
-                    _display.ClearConsole();
-                    _display.PrintMessage("You lost the Game!" + Environment.NewLine + "Press Enter To Continue!");
-                    _input.PressEnterToContinue();
+                    PressEnterMessages("You lost the Game!" + Environment.NewLine + "Press Enter To Continue!");
                     break;
                 }
             }
+        }
+
+        private void PlayerShoot(Player player1, Player player2, int CurrentPlayerNum)
+        {
+            DisplayBoards(player1, player2, $"Player {CurrentPlayerNum} Shoot!");
+            player1.Shoot(player2);
+        }
+
+        private bool IsAlive(Player player, int CurrentPlayerNum)
+        {
+            if (!player.IsAlive)
+            {
+                PressEnterMessages($"Player {CurrentPlayerNum} Has Won the Game!" + Environment.NewLine + "Press Enter To Continue!");
+                return true;
+            }
+
+            PressEnterMessages("Press Enter to continue!");
+            return false;
+        }
+
+        private void PressEnterMessages(string message)
+        {
+            _display.ClearConsole();
+            _display.PrintMessage(message);
+            _input.PressEnterToContinue();
+        }
+
+        private void DisplayBoards(Player player2, Player player1, string message)
+        {
+            _display.ClearConsole();
+            _display.PrintMessage("Your Fleet");
+            _display.PrintBoard(player2.Board.Ocean);
+            _display.PrintMessage("Enemy Fleet");
+            _display.PrintBoard(player1.Board.Ocean, true);
+            _display.PrintMessage(message);
         }
     }
 }
